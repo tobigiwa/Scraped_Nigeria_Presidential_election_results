@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "nigeria-elections-2023-data"
+version = "0.1.0"
+description = ""
+authors = ["OLuwatobiTobias <giwaoluwatobi@gmail.com>"]
+readme = "README.md"
+packages = [{include = "nigeria_elections_2023_data"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+selenium = "^4.8.2"
+webdriver-manager = "^3.8.5"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
