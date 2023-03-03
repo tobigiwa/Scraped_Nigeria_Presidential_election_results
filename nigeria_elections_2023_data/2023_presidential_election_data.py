@@ -34,11 +34,11 @@ raw_results = [re.sub(pattern, '', i.text, count=0) for i in dispatchList("table
 def transform_results(raw_data_point: str, header: List[str] = table_header) -> Dict[str, str]:
 
     pattern = re.compile("[a-zA-Z]+")
+
     str_data_point, states = re.sub(pattern,'', raw_data_point, count=0), pattern.findall(raw_data_point) # separats the states and string digits    
     integer_data_point = list(map(int, [i.replace(',', '') for i in str_data_point.split()]))  # converts the string digits to integers 
     votes_data = ['_'.join(states)] + integer_data_point
-    
-    return {key: value for key, value in zip(header, votes_data)} # dict comprehension
+    return {key: value for key, value in zip(header, votes_data)} 
 
 
 votes = list(map(transform_results, raw_results))

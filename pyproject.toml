@@ -10,6 +10,7 @@ packages = [{include = "nigeria_elections_2023_data"}]
 python = "^3.11"
 selenium = "^4.8.2"
 webdriver-manager = "^3.8.5"
+pandas = "^1.5.3"
 
 
 [build-system]
