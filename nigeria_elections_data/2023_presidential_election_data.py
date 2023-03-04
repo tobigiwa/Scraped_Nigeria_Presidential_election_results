@@ -29,10 +29,9 @@ table_header =  [i.replace(' ', '_') for i in table_header] + ["Others", "Total_
 
 pattern = re.compile("\d{1,2}%|\d{1,2}.\d{1,2}%|\[\d+\]")
 raw_results = [re.sub(pattern, '', i.text, count=0) for i in dispatchList("table:nth-of-type(13) tbody tr")]
-
+browser_driver.quit()
 
 def transform_results(raw_data_point: str, header: List[str] = table_header) -> Dict[str, str]:
-
     pattern = re.compile("[a-zA-Z]+")
 
     str_data_point, states = re.sub(pattern,'', raw_data_point, count=0), pattern.findall(raw_data_point) # separats the states and string digits    
@@ -45,8 +44,3 @@ votes = list(map(transform_results, raw_results))
 
 dataFrame = pd.DataFrame(votes, columns=table_header)
 dataFrame.to_csv("2023_presidential_data_points.csv", index=False)
-
-
-
-time.sleep(1)
-browser_driver.quit()
