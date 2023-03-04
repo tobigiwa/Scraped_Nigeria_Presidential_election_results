@@ -1,9 +1,11 @@
 [tool.poetry]
-name = "nigeria-elections-2023-data"
+name = "nigeria-elections-data"
 version = "0.1.0"
-description = ""
+description = "A project repo on all Nigeria's elections data"
+license = "MIT"
 authors = ["OLuwatobiTobias <giwaoluwatobi@gmail.com>"]
 readme = "README.md"
+repository = "https://github.com/OluwatobiTobias/Scraped_Nigeria_Presidential_election_results.git"
 packages = [{include = "nigeria_elections_2023_data"}]
 
 [tool.poetry.dependencies]
