@@ -1,35 +1,19 @@
-from selenium import webdriver
-from selenium.webdriver.remote.webelement import WebElement
-from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
-import time
-import re
+from main import browser_driver, dispatchList
 from typing import List, Dict
 import pandas as pd
+import re
 
 
-URL = "https://en.wikipedia.org/wiki/2023_Nigerian_presidential_election#By_state"
-
-browser_driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+URL = "https://en.wikipedia.org/wiki/2023_Nigerian_presidential_election"
 browser_driver.get(URL)
 
-def dispatch(locator:str, strategy:webdriver = By.CSS_SELECTOR, driver:webdriver = browser_driver) -> str:
-    "Call to selenium.webdriver.remote.webelement.WebElement.find_element()"
-    return driver.find_element(strategy, locator)
-
-
-def dispatchList(locator:str, strategy: webdriver = By.CSS_SELECTOR, driver:webdriver = browser_driver) -> List[WebElement]:
-    "Call to selenium.webdriver.remote.webelement.WebElement.find_elements()"
-    return driver.find_elements(strategy, locator)
-
-
-table_header = [i.text for i in dispatchList("table:nth-of-type(13) > thead > tr > th a")] 
+table_header = [i.text for i in dispatchList("table:nth-of-type(12) > thead > tr > th a")] 
 table_header =  [i.replace(' ', '_') for i in table_header] + ["Others", "Total_valid_votes"] # replace space between name with underscore + include two extra columns
 
 pattern = re.compile("\d{1,2}%|\d{1,2}.\d{1,2}%|\[\d+\]")
-raw_results = [re.sub(pattern, '', i.text, count=0) for i in dispatchList("table:nth-of-type(13) tbody tr")]
-browser_driver.quit()
+raw_results = [re.sub(pattern, '', i.text, count=0) for i in dispatchList("table:nth-of-type(12) tbody tr")]
+
+browser_driver.quit()  # quit automated web browser
 
 def transform_results(raw_data_point: str, header: List[str] = table_header) -> Dict[str, str]:
     pattern = re.compile("[a-zA-Z]+")
@@ -43,4 +27,4 @@ def transform_results(raw_data_point: str, header: List[str] = table_header) -> 
 votes = list(map(transform_results, raw_results))
 
 dataFrame = pd.DataFrame(votes, columns=table_header)
-dataFrame.to_csv("2023_presidential_data_points.csv", index=False)
+dataFrame.to_csv("2023_presidential_data_.csv", index=False)

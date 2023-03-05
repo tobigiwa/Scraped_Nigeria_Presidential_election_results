@@ -6,7 +6,7 @@ license = "MIT"
 authors = ["OLuwatobiTobias <giwaoluwatobi@gmail.com>"]
 readme = "README.md"
 repository = "https://github.com/OluwatobiTobias/Scraped_Nigeria_Presidential_election_results.git"
-packages = [{include = "nigeria_elections_2023_data"}]
+packages = [{include = "nigeria_elections_data"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"
