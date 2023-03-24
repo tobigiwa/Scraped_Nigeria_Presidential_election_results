@@ -4,7 +4,7 @@ import pandas as pd
 import re
 
 
-URL = "https://en.wikipedia.org/wiki/2019_Nigerian_general_election"
+URL = "https://en.wikipedia.org/wiki/2019_Nigerian_general_election#By_state"
 browser_driver.get(URL)
 
 table_header = [i.text for i in dispatchList("table:nth-of-type(7)  > thead > tr > th")[:9]] 
